@@ -754,6 +754,7 @@ main article.full h2 {
 }
 main article.full ul {
   padding: 0;
+  margin-left: 2rem;
 }
 main article.full a {
   text-decoration: none;
