@@ -853,10 +853,10 @@ main footer :not(main) > a {
 }
 main .avatar {
   margin: 50px auto auto auto;
-  width: 150px;
-  height: 150px;
+  width: 175px;
+  height: 175px;
   border-radius: 50%;
-  background: url("../images/avatar.jpg");
+  background: url("https://firebasestorage.googleapis.com/v0/b/peng940825-2b6ec.appspot.com/o/avatar.jpg?alt=media&token=686c224d-a6e9-4f53-b159-8783745944d0");
   background-repeat: no-repeat;
   -webkit-background-size: 100% 100%;
   -moz-background-size: 100% 100%;
@@ -865,6 +865,10 @@ main .avatar {
   -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
   -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-position: 0 -2rem;
 }
 main .avatar-name {
   text-align: center;
