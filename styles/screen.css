@@ -521,6 +521,7 @@ body {
   font-size: 1.62rem;
   font-weight: normal;
   line-height: 1.6em;
+  background: #f8f8f8;
 }
 a {
   color: #141414;
@@ -650,7 +651,7 @@ main {
   flex: 2;
   hypens: auto;
   overflow-x: hidden;
-  padding: 20px;
+  padding: 2.5rem;
   text-align: left;
   word-break: normal;
   word-wrap: break-word;
@@ -697,7 +698,6 @@ main .post-meta {
 main article.item {
   border-bottom: 1px solid rgba(0,0,0,0.15);
   color: #141414;
-  padding: 40px;
   text-align: center;
 }
 main article.item h2 {
@@ -726,9 +726,6 @@ main article.item:after {
   -webkit-box-shadow: #f8f8f8 0 0 0 5px;
   box-shadow: #f8f8f8 0 0 0 5px;
 }
-main article.full {
-  padding: 25px 0 0 50px;
-}
 main article.full span.page-tag-anchor {
   float: right;
 }
@@ -756,6 +753,8 @@ main article.full img {
   border-radius: 3px;
   height: auto;
   margin-top: 20px;
+  width: 100%;
+  max-width: 40rem;
 }
 main article.full blockquote {
   -webkit-box-sizing: border-box;
@@ -926,7 +925,6 @@ h2 {
 }
 h3 {
   font-size: 3.3rem;
-  margin-top: 7.5rem;
   font-weight: bold;
 }
 h4 {
@@ -952,7 +950,6 @@ a:hover {
 }
 hr {
   display: block;
-  height: 1px;
   border: 0;
   border-top: #d3d3d3 1px solid;
   margin: 40px 0;
@@ -1031,7 +1028,7 @@ hr:after {
     -webkit-flex: 2;
     -ms-flex: 2;
     flex: 2;
-    padding: 40px;
+    padding: 5rem;
   }
   body main form .form-column input[type="name"],
   body main form .form-column input[type="email"] {

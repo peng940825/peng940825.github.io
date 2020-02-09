@@ -5,7 +5,7 @@
 &nbsp;&nbsp;</a></span><span class="post-meta"></span><br><br><p>JavaScript 的繼承機制真的不是那麼一目瞭然的存在，但為了能更深入其中，這是一個躲也躲不掉的主題。</p>
 <p>網上能搜到相當多關於原型鏈的文章，其實知識點都大同小異，我就用我的思路理一下這條鏈子究竟是走一個什麼樣的套路。</p>
 <hr>
-<h3 id="函數物件"><a href="#函數物件" class="headerlink" title="# 函數物件"></a># 函數物件</h3><p>在 JavaScript 裡函數即物件，也被稱為一等公民，代表著程序得以隨意的操控函數，例如將函數賦值給一個變數或將其作為參數傳遞，甚者可以為函數設置屬性、調用方法。</p>
+<h3 id="函數物件"><a href="#函數物件" class="headerlink" title="函數物件"></a>函數物件</h3><p>在 JavaScript 裡函數即物件，也被稱為一等公民，代表著程序得以隨意的操控函數，例如將函數賦值給一個變數或將其作為參數傳遞，甚者可以為函數設置屬性、調用方法。</p>
 <p>普通物件：</p>
 <pre class=" language-js"><code class="language-js"><span class="token keyword">const</span> obj1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> obj2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
@@ -15,7 +15,7 @@
 <span class="token keyword">const</span> func3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>凡是用 <code>function</code> 關鍵字或 <code>Function</code> 構造函數創建的對象都稱作函數對象，但只有函數對象才擁有 <code>prototype</code> 屬性。</p>
 <hr>
-<h3 id="構造函數"><a href="#構造函數" class="headerlink" title="# 構造函數"></a># 構造函數</h3><p>JavaScript 不像傳統物件導向程式語言，它是沒有 class 的（ES6 的語法糖不在本文討論範圍），而且其實也沒有構造函數，儘管我們都這麼叫它，所以只要先知道</p>
+<h3 id="構造函數"><a href="#構造函數" class="headerlink" title="構造函數"></a>構造函數</h3><p>JavaScript 不像傳統物件導向程式語言，它是沒有 class 的（ES6 的語法糖不在本文討論範圍），而且其實也沒有構造函數，儘管我們都這麼叫它，所以只要先知道</p>
 <ul>
 <li><p>在函數前如果存在 <code>new</code> 這個關鍵字，這個函數就是構造函數</p>
 </li>
@@ -66,7 +66,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </li>
 </ul>
 <hr>
-<h3 id="new"><a href="#new" class="headerlink" title="# new"></a># new</h3><p>在上面當我們要創建出 <code>naruto</code> 以及 <code>sasuke</code> 的實例時，我們必須透過 <code>new</code> 這個關鍵字，而在創建實例時 <code>new</code> 基本做了以下四件事：</p>
+<h3 id="new"><a href="#new" class="headerlink" title="new"></a>new</h3><p>在上面當我們要創建出 <code>naruto</code> 以及 <code>sasuke</code> 的實例時，我們必須透過 <code>new</code> 這個關鍵字，而在創建實例時 <code>new</code> 基本做了以下四件事：</p>
 <ol>
 <li><p>建立一個新物件</p>
 </li>
@@ -93,7 +93,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>上面說過了在調用構造函數時前面沒有加 <code>new</code> 那麼就相當於一般的函數呼叫，所以 <code>Ninja</code> 在這裡就變成了一般函數而且並沒有 <code>return</code> 任何東西所以 <code>naruto</code> 自然會得到 <code>undefined</code>。</p>
 <p>再來，在執行 <code>Ninja</code> 函數裡面的代碼時 <code>this</code> 所指向的是全域的 <code>window</code> 物件，所以 <code>name</code> 與 <code>ninjutsu</code> 兩個屬性就被加到了 <code>window</code> 物件裡。</p>
 <hr>
-<h3 id="原型鏈"><a href="#原型鏈" class="headerlink" title="# 原型鏈"></a># 原型鏈</h3><p>回到上面的代碼</p>
+<h3 id="原型鏈"><a href="#原型鏈" class="headerlink" title="原型鏈"></a>原型鏈</h3><p>回到上面的代碼</p>
 <pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">Ninja</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> ninjutsu<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
   <span class="token keyword">this</span><span class="token punctuation">.</span>ninjutsu <span class="token operator">=</span> ninjutsu<span class="token punctuation">;</span>
@@ -151,13 +151,14 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>如果還有思緒沒理清的小夥伴們最後搭配這張更簡易的關係圖倒著回去看應該能有幫助。</p>
 <p><img src="https://firebasestorage.googleapis.com/v0/b/peng940825-2b6ec.appspot.com/o/prototype-chain%2Fimg-5.png?alt=media&token=4392bf98-8160-4f50-8cf7-460ebb794755" alt="img"></p>
 <hr>
-<h3 id="instanceOf"><a href="#instanceOf" class="headerlink" title="# instanceOf"></a># instanceOf</h3><p><code>instanceOf</code> 運算符可以用來判斷 <code>Object</code> 的 <code>prototype</code> 屬性是否存在於 <code>Function</code> 的原型鏈上。</p>
+<h3 id="instanceOf"><a href="#instanceOf" class="headerlink" title="instanceOf"></a>instanceOf</h3><p><code>instanceOf</code> 運算符可以用來判斷 <code>Object</code> 的 <code>prototype</code> 屬性是否存在於 <code>Function</code> 的原型鏈上。</p>
 <p>位於 <code>instanceOf</code> 左邊的運算元是物件的 <code>__proto__</code> 右邊則是函數的 <code>prototype</code>，這樣講可能還是有些模糊，一樣拿上面的範例做示範，上代碼！</p>
 <pre class=" language-js"><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>naruto <span class="token keyword">instanceof</span> <span class="token class-name">Ninja</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// true</span></code></pre>
 <p>相當於</p>
 <pre class=" language-js"><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>naruto<span class="token punctuation">.</span>__proto__ <span class="token operator">===</span> Ninja<span class="token punctuation">.</span>prototype<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// true</span></code></pre>
 <p>是不是很 easy 呢！</p>
-<h3 id="hasOwnProperty-NaN"><a href="#hasOwnProperty-NaN" class="headerlink" title="# hasOwnProperty"></a># hasOwnProperty</h3><p><code>hasOwnProperty</code> 則可用來檢查屬性屬於當前物件還是身處於原型鏈中。</p>
+<hr>
+<h3 id="hasOwnProperty-NaN"><a href="#hasOwnProperty-NaN" class="headerlink" title="hasOwnProperty"></a>hasOwnProperty</h3><p><code>hasOwnProperty</code> 則可用來檢查屬性屬於當前物件還是身處於原型鏈中。</p>
 <p>一樣拿上面的範例：</p>
 <pre class=" language-js"><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>naruto<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span><span class="token string">'name'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// true</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>naruto<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span><span class="token string">'attack'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// false</span></code></pre>
@@ -194,7 +195,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'wife'</span> <span class="token keyword">in</span> jay<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// true</span></code></pre>
 <p>而在此我們可以看到 <code>&#39;wife&#39; in jay</code> 所得到的結果為 <code>true</code>。</p>
 <hr>
-<h3 id="getPrototypeOf"><a href="#getPrototypeOf" class="headerlink" title="# getPrototypeOf"></a># getPrototypeOf</h3><p>上述不斷提及的 <code>__proto__</code> 屬性其實是內部屬性，一般也不建議用這種方式去取得相對應的 <code>[[Prototype]]</code>，只是為了展示代碼與思路比較清晰明瞭所以選擇 <code>__proto__</code>，</p>
+<h3 id="getPrototypeOf"><a href="#getPrototypeOf" class="headerlink" title="getPrototypeOf"></a>getPrototypeOf</h3><p>上述不斷提及的 <code>__proto__</code> 屬性其實是內部屬性，一般也不建議用這種方式去取得相對應的 <code>[[Prototype]]</code>，只是為了展示代碼與思路比較清晰明瞭所以選擇 <code>__proto__</code>，</p>
 <p>但我們可以使用 <code>getPrototypeOf</code> 這個方法取代 <code>__proto__</code>，像這樣：</p>
 <pre class=" language-js"><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>naruto<span class="token punctuation">)</span> <span class="token operator">===</span> Ninja<span class="token punctuation">.</span>prototype<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// true</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>Ninja<span class="token punctuation">)</span> <span class="token operator">===</span> Function<span class="token punctuation">.</span>prototype<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// true</span></code></pre>
@@ -206,7 +207,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li><a href="https://blog.techbridge.cc/2017/04/22/javascript-prototype/" target="_blank" rel="noopener">該來理解 JavaScript 的原型鍊了</a></li>
 <li><a href="http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html" target="_blank" rel="noopener">JavaScript 繼承機制的設計思想</a></li>
 <li><a href="https://www.jianshu.com/p/a97863b59ef7" target="_blank" rel="noopener">從設計初衷解釋 JavaScript 原型鏈</a></li>
-<li><a href="https://github.com/creeperyang/blog/issues/9" target="_blank" rel="noopener">從 <strong>proto</strong> 和 prototype 來深入理解 JS 對象和原型鏈</a></li>
+<li><a href="https://github.com/creeperyang/blog/issues/9" target="_blank" rel="noopener">從 proto 和 prototype 來深入理解 JS 對象和原型鏈</a></li>
 <li><a href="https://blog.oyanglul.us/javascript/understand-prototype.html" target="_blank" rel="noopener">理解 JavaScript 的原型鏈和繼承</a></li>
 <li><a href="https://cythilya.github.io/2018/10/26/prototype/" target="_blank" rel="noopener">你懂 JavaScript 嗎？#19 原型（Prototype）</a></li>
 <li><a href="https://www.jianshu.com/p/f69d8767c066" target="_blank" rel="noopener">JavaScript 闖關記之原型與原型鏈</a></li>
