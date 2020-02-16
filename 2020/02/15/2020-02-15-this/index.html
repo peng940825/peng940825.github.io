@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>關於 this | Jun</title><meta name="description"><meta name="generator" content="Jun"><meta name="author"><meta name="keywords"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" type="image/png" sizes="196x196" href="/images/favicon-196x196.png"><meta name="msapplication-TileColor" content="#FFFFFF"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x310.png"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><h1><a href="/" alt="Jun" title="Jun" itemprop="headline">Jun</a></h1><p itemprop="description"></p><p>只要我的心還會跳，腿還能動</p><p>我就沒有理由停下前進的步伐</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/articles" alt="文章" title="文章" itemprop="url">文章</a></li><li itemprop="name"><a href="/author" alt="作者" title="作者" itemprop="url">作者</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline" class="post-heading">關於 this</h1><span class="page-tag-anchor"><a href="/tags/w3HexSchool" itemprop="url">#w3HexSchool
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/this" itemprop="url">#this
+&nbsp;&nbsp;</a></span><span class="post-meta"></span><br><br><p>JavaScript 的 this 相信已經是一個討論到爛掉的話題了，但即便如此它仍然不是那麼好懂，為了加深印象這篇會用偏向筆記的形式記錄常見的 this 情境並加以說明。</p>
+<p>其實 this 可以說簡單也可以說難，簡單呢因為它不過是 ECMAScript 規範裡的一部分，關於 this 指向誰背後都是有完整的定義，但我相信一般人沒事不會去讀那種鬼東西，難呢因為想在任何情況下都能迅速的答出 this 正確的值必須也要瞭解 JavaScript 的作用域以及各種能改變 this 的方法與情境，所以廢話不多說，我們開始吧。</p>
+<hr>
+<h3 id="this-指向誰"><a href="#this-指向誰" class="headerlink" title="this 指向誰"></a>this 指向誰</h3><p>記住這句話＂this 指向最後調用它的那個物件＂就這麼簡單，讓我們看看以下的範例：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// window</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// window.func();</span></code></pre>
+<p>在此調用 <code>func</code> 函數時其實是等價於 <code>window.func</code> 的因為：</p>
+<ul>
+<li><p>非嚴格模式，瀏覽器的全域物件是 <code>window</code></p>
+</li>
+<li><p>非嚴格模式，Node.js 的全域物件是 <code>global</code></p>
+</li>
+<li><p>嚴格模式 <code>&#39;use strict&#39;;</code> 下則會出現 <code>undefined</code></p>
+</li>
+</ul>
+<p>所以當我們調用 <code>func</code> 函數時其實只是省略了 <code>window</code> 而已，實際上它是被 <code>window</code> 所調用的，那麼鑒於上面所說的＂this 指向最後調用它的那個物件＂，這個範例的 <code>this</code> 所指向的就是 <code>window</code>。</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// obj</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+obj<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>相信這邊就很好懂了，最後調用 <code>func</code> 函數的物件是 <code>obj</code> 所以 <code>this</code> 自然是 <code>obj</code>。</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// obj</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+window<span class="token punctuation">.</span>obj<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>這邊在最後一行做了一點小改動，但答案依然是 <code>obj</code>，仍然鑒於上面所說的那句話，最後調用函數的那個物件就是該函數的 <code>this</code>，雖然最後一行的寫法很完整，但最後調用 <code>func</code> 函數的物件就是 <code>obj</code> 不是 <code>window</code>，所以 <code>this</code> 就是指向 <code>obj</code>。</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token string">'outside'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// undefined</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+window<span class="token punctuation">.</span>obj<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>這邊加入了一個全域變數 <code>x</code>，然後我想在 <code>func</code> 函數裡取得 <code>x</code>，但我得到的是 <code>undefined</code> 為什麼呢？一樣鑒於上面所說的那句話，調用 <code>func</code> 函數的是 <code>obj</code>，意即 <code>this</code> 為 <code>obj</code>，然而 <code>obj</code> 裡並沒有定義 <code>x</code> 所以 <code>this.x</code> 的值就是 <code>undefined</code>。</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token string">'outside'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  x<span class="token punctuation">:</span> <span class="token string">'inside'</span><span class="token punctuation">,</span>
+
+  <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// outside</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> func2 <span class="token operator">=</span> window<span class="token punctuation">.</span>obj<span class="token punctuation">.</span>func<span class="token punctuation">;</span>
+
+<span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// window.func2();</span></code></pre>
+<p>這邊你可能會有疑問，為什麼 <code>this.x</code> 不是 inside？一樣是那句話，我們可以先只看最後一行，調用 <code>func2</code> 函數實則等價於 <code>window.func2</code> 的調用，所以 <code>func2</code> 函數是被 <code>window</code> 所調用的，<code>this</code> 自然指向 <code>window</code>，而 <code>window.x</code> 就是 outside ，所以說即便把 <code>window.obj.func</code> 賦值給了 <code>func2</code> 變數再做調用，<code>this</code> 的指向依然能驗證我們上面說的句話：＂this 指向最後調用它的那個物件＂。</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token string">'outside'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token string">'inside'</span><span class="token punctuation">;</span>
+
+  <span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> <span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>如果你有朗誦我們的金句 7749 遍加上理解以上的範例我想這題肯定是小菜一碟，就交給各位自行跑出答案囉～</p>
+<hr>
+<h3 id="第二種理解方式"><a href="#第二種理解方式" class="headerlink" title="第二種理解方式"></a>第二種理解方式</h3><p>JavaScript ES5 裡有三種函數調用方式：</p>
+<pre class=" language-js"><code class="language-js"><span class="token function">func</span><span class="token punctuation">(</span>v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+obj<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span>v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+func<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>一般在工作情境我們都是使用前兩者居多，但其實第三種調用方式，才是函數真正的調用形式。</p>
+<pre class=" language-js"><code class="language-js"><span class="token function">func</span><span class="token punctuation">(</span>v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 等價於</span>
+func<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>undefined<span class="token punctuation">,</span> v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+obj<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span>v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 等價於</span>
+obj<span class="token punctuation">.</span>func<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>接下來我們就使用第三種調用形式來理解 <code>this</code> 到底是誰：</p>
+<pre class=" language-js"><code class="language-js">func<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p><code>this</code> 就是第三種調用形式裡面的 <code>context</code>，也就是第一個傳入的參數，如此而已，我們看看以下的範例：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// func.call(undefined);</span></code></pre>
+<p>這段代碼在上面的小結出現過，一個基本的函數調用，在此我們用函數原生的 <code>call</code> 方法調用來理解最後一行的 <code>func();</code> 其實就等價於一旁的註解 <code>func.call(undefined);</code>。</p>
+<p>在 <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Function/call" target="_blank" rel="noopener">MDN 的 Function.prototype.call</a> 裡面有提到：若此函數是在非嚴格模式下時，第一個參數為 <code>null</code>、<code>undefined</code> 將會被置換成全域變數。在此我們的全域變數就是 <code>window</code>。</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+obj<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// obj.func.call(obj);</span></code></pre>
+<p>跟上一個範例一樣，我們在註解做了等價的代碼轉換示例，傳入的第一個參數 <code>context</code> 為 <code>obj</code> 所以 <code>obj</code> 就會成為該函數的 <code>this</code>！</p>
+<p>其實第二種理解方式跟第一種基本一樣，還是脫離不開＂this 指向最後調用它的那個物件＂這句話，只不過算是用另一個角度，透過函數原生的 <code>call</code> 方法來加深觀念罷了，以上只是為了理解用，相信你若聽過 <code>call</code> 大概率也知道 <code>apply</code> 與 <code>bind</code>，多數情況會使用到它們都是為了改變 <code>this</code> 的指向，所以：</p>
+<hr>
+<h3 id="call、apply、bind"><a href="#call、apply、bind" class="headerlink" title="call、apply、bind"></a>call、apply、bind</h3><p>我們可以透過函數原生的 <code>call</code>、<code>apply</code>、<code>bind</code> 這三個方法來改變 <code>this</code> 的值，但這三個函數稍有不同，不過我們先來看看範例：</p>
+<pre class=" language-js"><code class="language-js"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span>v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">func</span><span class="token punctuation">(</span><span class="token string">'v1'</span><span class="token punctuation">,</span> <span class="token string">'v2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// undefined "v1" "v2"</span>
+func<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>undefined<span class="token punctuation">,</span> <span class="token string">'v1'</span><span class="token punctuation">,</span> <span class="token string">'v2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// undefined "v1" "v2"</span>
+func<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>undefined<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'v1'</span><span class="token punctuation">,</span> <span class="token string">'v2'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// undefined "v1" "v2"</span></code></pre>
+<p>這個範例就帶到上述重要的兩個觀念：</p>
+<ol>
+<li><p>在嚴格模式下這樣呼叫 <code>func(&#39;v1&#39;, &#39;v2&#39;);</code> 的話 <code>this</code> 即 <code>undefined</code>。</p>
+</li>
+<li><p>第二種理解方式不斷提到的 <code>func(&#39;v1&#39;, &#39;v2&#39;);</code> 等價於 <code>func.call(undefined, &#39;v1&#39;, &#39;v2&#39;);</code>。</p>
+</li>
+</ol>
+<p>在這個範例都能被驗證，這樣對於 <code>this</code> 的思路是不是更清晰了呢～</p>
+<p>那你可能會好奇 <code>apply</code> 呢？</p>
+<p><code>apply</code> 與 <code>call</code> 的差別只在於傳入的參數，<code>call</code> 的參數可以一個一個傳 <code>apply</code> 則只接受一個陣列，就這樣，除此之外基本一模一樣。</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token string">'window'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  x<span class="token punctuation">:</span> <span class="token string">'obj'</span><span class="token punctuation">,</span>
+  <span class="token function">func</span><span class="token punctuation">(</span>v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>x<span class="token punctuation">,</span> v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> obj2 <span class="token operator">=</span> <span class="token punctuation">{</span>
+  x<span class="token punctuation">:</span> <span class="token string">'obj2'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> func2 <span class="token operator">=</span> obj<span class="token punctuation">.</span>func<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>obj2<span class="token punctuation">,</span> <span class="token string">'v1'</span><span class="token punctuation">,</span> <span class="token string">'v2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+obj<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token string">'v1'</span><span class="token punctuation">,</span> <span class="token string">'v2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// obj v1 v2</span>
+<span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// obj2 v1 v2</span></code></pre>
+<p>這邊示範了 <code>bind</code> 的用法，<code>bind</code> 與 <code>call</code>、<code>apply</code> 的差別是它會回傳一個新的函數，而你傳入的參數就是該函數所綁定的 <code>this</code>。</p>
+<p><code>obj.func(&#39;v1&#39;, &#39;v2&#39;);</code> 是普通的調用方式，答案也可想而知，但若我們想要調用該函數且希望 <code>this</code> 指向的是 <code>obj2</code> 這個物件，我們就使用 <code>bind</code> 做綁定，傳入的參數方式與 <code>call</code> 相同但我們需要將這個新函數賦值給一個變數再做調用。</p>
+<p>以上就是可以改變 <code>this</code> 的三種方式，但要注意的一點，無論你使用 <code>call</code>、<code>apply</code> 或 <code>bind</code>，你傳入的 <code>context</code> 如果是基本型別都會被轉成物件：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+func<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token number">1450</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Number {1450}</span>
+func<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token string">'1450'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// String {'1450'}</span></code></pre>
+<hr>
+<h3 id="在函數內部定義另一個變數存取-this"><a href="#在函數內部定義另一個變數存取-this" class="headerlink" title="在函數內部定義另一個變數存取 this"></a>在函數內部定義另一個變數存取 this</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// window</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Uncaught TypeError: this.func1 is not a function</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+obj<span class="token punctuation">.</span><span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>這個範例，如果我想在 <code>setTimeout</code> 裡調用 <code>func1</code> 函數該怎麼做？因為 <code>setTimeout</code> 裡的 <code>this</code> 是 <code>window</code> 然而 <code>window</code> 物件裡並沒有 <code>func1</code> 函數所以我們會得到錯誤訊息但我們可以這麼做：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> that <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      obj<span class="token punctuation">.</span><span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// obj</span>
+      that<span class="token punctuation">.</span><span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// obj</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+obj<span class="token punctuation">.</span><span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>我們可以直接用 <code>obj.func1();</code> 的方式去調用也可以在 <code>func2</code> 函數裡的開頭就先定義另一個變數存取當前的 <code>this</code>（<code>obj</code>）後再做調用。</p>
+<hr>
+<h3 id="箭頭函數"><a href="#箭頭函數" class="headerlink" title="箭頭函數"></a>箭頭函數</h3><p>理解箭頭函數的幾個重點：</p>
+<ul>
+<li><p>箭頭函數的 <code>this</code> 指向的是該函數定義時的 <code>this</code>，並非執行時的。</p>
+</li>
+<li><p>箭頭函數中沒有 <code>this</code>，必須通過查找作用域來決定 <code>this</code> 的值。</p>
+</li>
+</ul>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// obj</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+obj<span class="token punctuation">.</span><span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// obj</span></code></pre>
+<p>這個範例跟上面的一樣，但我不用定義另一個變數存取當前的 <code>this</code>，用箭頭函數就可取得 <code>obj</code> 內的 <code>func1</code>。</p>
+<p>箭頭函數中沒有 <code>this</code>，所以在 <code>setTimeout</code> 裡 <code>this.func1();</code> 調用時它會查找作用域取得 <code>this</code>，也可以說在定義 <code>this.func1();</code> 時的 <code>this</code> 是什麼就是什麼，我們是在 <code>func2</code> 內定義 <code>this.func1();</code> 的 <code>func2</code> 內的 <code>this</code> 指向的是 <code>obj</code>，所以 <code>this.func1();</code> 就等價於 <code>obj.func1();</code>，執行的結果 <code>this</code> 就是 <code>obj</code>。</p>
+<hr>
+<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><p><code>this</code> 指向誰一開始真的很難搞懂，但仍然是前端開發者必須也是必懂的主題之一，至於為什麼這麼難懂呢？<del>因為它是 JavaScript 啊</del> 在大部分的物件導向程式語言裡 <code>this</code> 就是指向 <code>instance</code> 本身，所以並不難理解，但在 JavaScript 裡就真的猶如在迷宮般穿梭著，不過我相信光是這句＂this 指向最後調用它的那個物件＂就能解掉大部分關於 <code>this</code> 的題目了，至於有些更偏於規範而不常出現在實際工作情境的題目可能就得去查閱 ECMAScript 才知道了。</p>
+</article><div data-mobile="true" data-href="https://peng940825.github.io/2020/02/15/2020-02-15-this" class="fb-comments"></div><span class="next-post"><a href="/2020/02/08/2020-02-08-prototype/" itemprop="url">Older Post ⇒</a></span><br><br><br></main><script async src="https://www.googletagmanager.com/gtag/js?id=UA-158090190-1"></script><script async>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-158090190-1');
+</script><div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&amp;version=v6.0"></script></body></html>

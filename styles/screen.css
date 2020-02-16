@@ -430,79 +430,92 @@ th {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 300;
-  src: url("../fonts/opensans/300.woff2") format('woff2'), url("../fonts/opensans/300.woff") format('woff');
+  src: url('../fonts/opensans/300.woff2') format('woff2'),
+    url('../fonts/opensans/300.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/opensans/400.woff2") format('woff2'), url("../fonts/opensans/400.woff") format('woff');
+  src: url('../fonts/opensans/400.woff2') format('woff2'),
+    url('../fonts/opensans/400.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
-  src: url("../fonts/opensans/600.woff2") format('woff2'), url("../fonts/opensans/600.woff") format('woff');
+  src: url('../fonts/opensans/600.woff2') format('woff2'),
+    url('../fonts/opensans/600.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: url("../fonts/opensans/700.woff2") format('woff2'), url("../fonts/opensans/700.woff") format('woff');
+  src: url('../fonts/opensans/700.woff2') format('woff2'),
+    url('../fonts/opensans/700.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 800;
-  src: url("../fonts/opensans/800.woff2") format('woff2'), url("../fonts/opensans/800.woff") format('woff');
+  src: url('../fonts/opensans/800.woff2') format('woff2'),
+    url('../fonts/opensans/800.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: italic;
   font-weight: 300;
-  src: url("../fonts/opensans/300i.woff2") format('woff2'), url("../fonts/opensans/300i.woff") format('woff');
+  src: url('../fonts/opensans/300i.woff2') format('woff2'),
+    url('../fonts/opensans/300i.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: italic;
   font-weight: 400;
-  src: url("../fonts/opensans/400i.woff2") format('woff2'), url("../fonts/opensans/400i.woff") format('woff');
+  src: url('../fonts/opensans/400i.woff2') format('woff2'),
+    url('../fonts/opensans/400i.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: italic;
   font-weight: 600;
-  src: url("../fonts/opensans/600i.woff2") format('woff2'), url("../fonts/opensans/600i.woff") format('woff');
+  src: url('../fonts/opensans/600i.woff2') format('woff2'),
+    url('../fonts/opensans/600i.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: italic;
   font-weight: 700;
-  src: url("../fonts/opensans/700i.woff2") format('woff2'), url("../fonts/opensans/700i.woff") format('woff');
+  src: url('../fonts/opensans/700i.woff2') format('woff2'),
+    url('../fonts/opensans/700i.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: italic;
   font-weight: 800;
-  src: url("../fonts/opensans/800i.woff2") format('woff2'), url("../fonts/opensans/800i.woff") format('woff');
+  src: url('../fonts/opensans/800i.woff2') format('woff2'),
+    url('../fonts/opensans/800i.woff') format('woff');
 }
 @font-face {
   font-family: 'Fira Mono';
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/fira/400.woff2") format('woff2'), url("../fonts/fira/400.woff") format('woff');
+  src: url('../fonts/fira/400.woff2') format('woff2'),
+    url('../fonts/fira/400.woff') format('woff');
 }
 @font-face {
   font-family: 'Fira Mono';
   font-style: normal;
   font-weight: 500;
-  src: url("../fonts/fira/500.woff2") format('woff2'), url("../fonts/fira/500.woff") format('woff');
+  src: url('../fonts/fira/500.woff2') format('woff2'),
+    url('../fonts/fira/500.woff') format('woff');
 }
 @font-face {
   font-family: 'Fira Mono';
   font-style: normal;
   font-weight: 700;
-  src: url("../fonts/fira/700.woff2") format('woff2'), url("../fonts/fira/700.woff") format('woff');
+  src: url('../fonts/fira/700.woff2') format('woff2'),
+    url('../fonts/fira/700.woff') format('woff');
 }
 html {
   font-size: 62.5%;
@@ -578,7 +591,7 @@ header h1 {
   font-size: 4.5rem;
   font-weight: 300;
   letter-spacing: -1px;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 }
 header h1 a:hover {
   text-decoration: none;
@@ -590,7 +603,7 @@ header p {
   font-weight: normal;
   letter-spacing: 0;
   margin: 0;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
 }
 header nav ul {
   list-style: none;
@@ -633,7 +646,7 @@ header .logo {
   -webkit-background-size: contain;
   -moz-background-size: contain;
   background-size: contain;
-  background: url("../images/logo.png") no-repeat #fafafa;
+  background: url('../images/logo.png') no-repeat #fafafa;
   background-color: #fafafa;
   background-position: center;
   position: relative;
@@ -696,13 +709,14 @@ main .post-meta {
   margin: 0;
 }
 main article.item {
-  border-bottom: 1px solid rgba(0,0,0,0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   color: #141414;
   text-align: center;
 }
 main article.item h2 {
   break-word: normal;
   color: #141414;
+  margin-top: 3rem;
   margin-bottom: 16px;
   word-wrap: break-word;
 }
@@ -718,7 +732,7 @@ main article.item:after {
   height: 7px;
   border: 1px solid #dadada 1px solid;
   position: relative;
-  top: 45px;
+  top: 34px;
   left: 50%;
   margin-left: -5px;
   background: #d3d3d3;
@@ -738,7 +752,7 @@ main article.full h2 {
 }
 main article.full ul {
   padding: 0;
-  margin-left: 2rem;
+  margin-left: 4rem;
 }
 main article.full a {
   text-decoration: none;
@@ -832,7 +846,7 @@ main span.prev-post a:hover {
   color: #737373;
 }
 main section#comments {
-  border-top: 1px solid rgba(0,0,0,0.15);
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
   padding-top: 20px;
 }
 main footer {
@@ -856,15 +870,15 @@ main .avatar {
   width: 175px;
   height: 175px;
   border-radius: 50%;
-  background: url("https://firebasestorage.googleapis.com/v0/b/peng940825-2b6ec.appspot.com/o/avatar.jpg?alt=media&token=686c224d-a6e9-4f53-b159-8783745944d0");
+  background: url('https://firebasestorage.googleapis.com/v0/b/peng940825-2b6ec.appspot.com/o/avatar.jpg?alt=media&token=686c224d-a6e9-4f53-b159-8783745944d0');
   background-repeat: no-repeat;
   -webkit-background-size: 100% 100%;
   -moz-background-size: 100% 100%;
   background-size: 100% 100%;
-  -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
-  -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
-  box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -1032,10 +1046,10 @@ hr:after {
     -webkit-flex: 2;
     -ms-flex: 2;
     flex: 2;
-    padding: 5rem;
+    padding: 3rem 5rem 5rem 5rem;
   }
-  body main form .form-column input[type="name"],
-  body main form .form-column input[type="email"] {
+  body main form .form-column input[type='name'],
+  body main form .form-column input[type='email'] {
     width: 35%;
     margin: 0.5em 0.5em 0.5em 0;
   }
@@ -1103,4 +1117,8 @@ hr:after {
     -ms-transform: translate3d(-240px, -240px, 0);
     transform: translate3d(-240px, -240px, 0);
   }
+}
+
+.operator {
+  background: none !important;
 }
