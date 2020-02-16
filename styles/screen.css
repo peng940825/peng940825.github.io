@@ -712,6 +712,7 @@ main article.item {
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   color: #141414;
   text-align: center;
+  padding-bottom: 3rem;
 }
 main article.item h2 {
   break-word: normal;
