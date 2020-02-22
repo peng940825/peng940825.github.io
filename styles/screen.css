@@ -756,7 +756,7 @@ main article.full img {
   height: auto;
   margin-top: 20px;
   width: 100%;
-  max-width: 40rem;
+  max-width: 500px;
 }
 main article.full blockquote {
   -webkit-box-sizing: border-box;

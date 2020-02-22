@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>純前端實現寄信功能 | Jun</title><meta name="description"><meta name="generator" content="Jun"><meta name="author"><meta name="keywords"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" type="image/png" sizes="196x196" href="/images/favicon-196x196.png"><meta name="msapplication-TileColor" content="#FFFFFF"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x310.png"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><h1><a href="/" alt="Jun" title="Jun" itemprop="headline">Jun</a></h1><p itemprop="description"></p><p>只要我的心還會跳，腿還能動</p><p>我就沒有理由停下前進的步伐</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/articles" alt="文章" title="文章" itemprop="url">文章</a></li><li itemprop="name"><a href="/author" alt="作者" title="作者" itemprop="url">作者</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline" class="post-heading">純前端實現寄信功能</h1><span class="page-tag-anchor"><a href="/tags/Email" itemprop="url">#Email
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/JavaScript" itemprop="url">#JavaScript
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/w3HexSchool" itemprop="url">#w3HexSchool
+&nbsp;&nbsp;</a></span><span class="post-meta"></span><br><br><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近為了做一個簡單的寄信功能找了許多方法，目標是：</p>
+<ul>
+<li>免費</li>
+<li>簡單的信件版面調整</li>
+<li>純 JavaScript 即可完成</li>
+</ul>
+<p>為此紀錄一下這個快速又容易上手的套件，EmailJS。</p>
+<hr>
+<h3 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h3><ul>
+<li><p>Step1：進入 EmailJS 的官網 <a href="https://www.emailjs.com" target="_blank" rel="noopener">https://www.emailjs.com</a> 建立一個帳戶。</p>
+</li>
+<li><p>Step2：在右側選擇你要創建的 Email services，這邊我們就選較普遍的 Gmail。</p>
+</li>
+</ul>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/peng940825-2b6ec.appspot.com/o/emailjs%2Fimg-1.png?alt=media&token=8d7edc4b-adbe-4160-b35d-7e14d1bf40f1" alt="img"></p>
+<ul>
+<li>Step3：接著點擊 Connect account 連接你的 Gmail 帳戶，接受存取權後按下 Add Service。</li>
+</ul>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/peng940825-2b6ec.appspot.com/o/emailjs%2Fimg-2.png?alt=media&token=4ac6deec-61e1-4b3f-bdde-486e21b8bd32" alt="img"></p>
+<ul>
+<li>Step4：接著點擊左側選單的 Email Templates，信件編輯區非常簡潔直觀，參數的部分普通文字使用雙花括號包裹，html 內容則使用三個花括號，編輯完成後按下右上角的 Save 即可。</li>
+</ul>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/peng940825-2b6ec.appspot.com/o/emailjs%2Fimg-3.png?alt=media&token=d47f66b9-7054-4021-b4ec-433640637b55" alt="img"></p>
+<hr>
+<h3 id="在-Vue-CLI-裡使用"><a href="#在-Vue-CLI-裡使用" class="headerlink" title="在 Vue CLI 裡使用"></a>在 Vue CLI 裡使用</h3><p>接下來進入程式碼的部分，框架選用的是 Vue，首先我們先安裝</p>
+<pre class=" language-md"><code class="language-md">npm install emailjs-com --save</code></pre>
+<p>安裝完成後我們可以在要使用 EmailJS 的元件內 <code>import</code> 就好</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">import</span> emailjs <span class="token keyword">from</span> <span class="token string">'emailjs-com'</span><span class="token punctuation">;</span></code></pre>
+<p>接著是代碼的部分：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/peng940825-2b6ec.appspot.com/o/emailjs%2Fimg-4.png?alt=media&token=e2857387-17d1-4f57-96ad-bd2076b2f727" alt="img"></p>
+<p><code>emailjs.send</code> 函數接受四個參數：</p>
+<ol>
+<li><p>service_id：是我們一開始選擇的 gmail</p>
+</li>
+<li><p>template_id：</p>
+</li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/peng940825-2b6ec.appspot.com/o/emailjs%2Fimg-5.png?alt=media&token=876cebc3-cc64-4b0f-9110-624c6654a201" alt="img"></p>
+<ol start="3">
+<li><p>templateParams：模板參數的部分，在此範例 <code>templateParams.user</code> 是用戶的姓名，<code>templateParams.userMail</code> 是用戶的信箱，<code>templateParams.emailContent</code> 是信件的內容，這邊以 html 示範</p>
+</li>
+<li><p>user_id：</p>
+</li>
+</ol>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/peng940825-2b6ec.appspot.com/o/emailjs%2Fimg-6.png?alt=media&token=4a39e901-3a11-41e7-a124-5e10ac65512c" alt="img"></p>
+<p>都準備好後就可以試寄看看</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/peng940825-2b6ec.appspot.com/o/emailjs%2Fimg-7.jpg?alt=media&token=50ae56c3-2024-477d-959c-382e40a9f2cb" alt="img"></p>
+<p>這樣就成功囉！</p>
+<p>如果還想知道更多的玩法可以參考他們的文件 <a href="https://www.emailjs.com/docs/" target="_blank" rel="noopener">https://www.emailjs.com/docs/</a> 裡面也有 Angular、React 以及 jQuery 的代碼示範。</p>
+</article><div data-mobile="true" data-href="https://peng940825.github.io/2020/02/15/2020-02-22-emailjs" class="fb-comments"></div><span class="next-post"><a href="/2020/02/15/2020-02-15-this/" itemprop="url">Older Post ⇒</a></span><br><br><br></main><script async src="https://www.googletagmanager.com/gtag/js?id=UA-158090190-1"></script><script async>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-158090190-1');
+</script><div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&amp;version=v6.0"></script></body></html>
