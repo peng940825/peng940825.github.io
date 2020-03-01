@@ -1,0 +1,293 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>常用陣列方法 | Jun</title><meta name="description"><meta name="generator" content="Jun"><meta name="author"><meta name="keywords"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" type="image/png" sizes="196x196" href="/images/favicon-196x196.png"><meta name="msapplication-TileColor" content="#FFFFFF"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x310.png"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><h1><a href="/" alt="Jun" title="Jun" itemprop="headline">Jun</a></h1><p itemprop="description"></p><p>只要我的心還會跳，腿還能動</p><p>我就沒有理由停下前進的步伐</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/articles" alt="文章" title="文章" itemprop="url">文章</a></li><li itemprop="name"><a href="/author" alt="作者" title="作者" itemprop="url">作者</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline" class="post-heading">常用陣列方法</h1><span class="page-tag-anchor"><a href="/tags/JavaScript" itemprop="url">#JavaScript
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/w3HexSchool" itemprop="url">#w3HexSchool
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/Array" itemprop="url">#Array
+&nbsp;&nbsp;</a></span><span class="post-meta"></span><br><br><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本篇記錄一些工作上常用到的陣列方法，目的為能夠快速查找與使用，若需要更深入的解釋或範例可至 MDN 閱讀。</p>
+<p>文中有些函數為 Pure function，意即操作時不會改變原陣列的內容，也可稱為無副作用，其餘的函數在操作後原陣列皆有可能產生變動。</p>
+<p>一些常用到的 ES6 函數如 <code>some()</code>、<code>every()</code>、<code>map()</code>、<code>filter()</code> 的回呼函數內的參數範例只帶第 1 個 <code>element</code>，後面的 <code>index</code>、<code>array</code> 分別代表各元素索引值與該陣列就不加以贅述與示範，相信用過 <code>forEach()</code> 的人都很孰悉了。</p>
+<hr>
+<h3 id="some"><a href="#some" class="headerlink" title=".some()"></a>.some()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> res1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">some</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> item <span class="token operator">===</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// true</span>
+
+<span class="token keyword">const</span> res2 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">some</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> item <span class="token operator">===</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// false</span></code></pre>
+<ul>
+<li>用途：透過給定函數驗證元素是否滿足條件，只要有 1 個滿足即回傳 <code>true</code>，全部不滿足則回傳 <code>false</code></li>
+<li>參數：<code>callback(element[, index[, array]])[, thisArg]</code></li>
+<li>回傳：布林值</li>
+</ul>
+<hr>
+<h3 id="every"><a href="#every" class="headerlink" title=".every()"></a>.every()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> res1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">every</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> item <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// true</span>
+
+<span class="token keyword">const</span> res2 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">every</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> item <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// false</span></code></pre>
+<ul>
+<li>用途：透過給定函數驗證元素是否滿足條件，全部滿足即回傳 <code>true</code>，只要有 1 個不滿足即回傳 <code>false</code></li>
+<li>參數：<code>callback(element[, index[, array]])[, thisArg]</code></li>
+<li>回傳：布林值</li>
+</ul>
+<hr>
+<h3 id="map"><a href="#map" class="headerlink" title=".map()"></a>.map()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> res1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ undefined, undefined, undefined, undefined, undefined ]</span>
+
+<span class="token keyword">const</span> res2 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> item <span class="token operator">+</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 6, 7, 8, 9, 10 ]</span>
+
+<span class="token keyword">const</span> res3 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> item <span class="token operator">></span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res3<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ false, false, false, true, true ]</span>
+
+<span class="token keyword">const</span> res4 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>item <span class="token operator">></span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token keyword">return</span> item<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res4<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ undefined, undefined, undefined, 4, 5 ]</span></code></pre>
+<ul>
+<li>Pure function</li>
+<li>用途：透過給定函數對各元素運算後回傳一個新陣列，回傳的新陣列長度與原陣列相同</li>
+<li>注意：沒有給予 <code>return</code> 的元素預設回傳 <code>undefined</code>，需注意各元素是否有針對各種條件 <code>return</code> 期望的值</li>
+<li>參數：<code>callback(element[, index[, array]])[, thisArg]</code></li>
+<li>回傳：新陣列</li>
+</ul>
+<hr>
+<h3 id="filter"><a href="#filter" class="headerlink" title=".filter()"></a>.filter()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> res1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// []</span>
+
+<span class="token keyword">const</span> res2 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> item <span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 3, 4, 5 ]</span></code></pre>
+<ul>
+<li>Pure function</li>
+<li>用途：透過給定函數對各元素運算後回傳一個新陣列</li>
+<li>注意：回呼函數若沒有 <code>return</code> 則會回傳空陣列</li>
+<li>參數：<code>callback(element[, index[, array]])[, thisArg]</code></li>
+<li>回傳：包含滿足條件元素的新陣列</li>
+</ul>
+<hr>
+<h3 id="slice"><a href="#slice" class="headerlink" title=".slice()"></a>.slice()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> res1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 4, 5 ]</span>
+
+<span class="token keyword">const</span> res2 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 3, 4 ]</span>
+
+<span class="token keyword">const</span> res3 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res3<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 2, 3, 4 ]</span></code></pre>
+<ul>
+<li>Pure function</li>
+<li>用途：依據參數擷取元素後回傳</li>
+<li>參數：<code>begin[, end]</code><ul>
+<li><code>begin</code>（起始值）<ul>
+<li>可使用負數索引，表由陣列的最末項開始提取</li>
+<li>若 <code>begin</code> 為 <code>undefined</code> 則從索引 0 開始提取</li>
+</ul>
+</li>
+<li><code>end</code>（結束值）<ul>
+<li>可使用負數索引，表由陣列的最末項開始提取</li>
+<li>若省略 <code>end</code> 則會提取至陣列的最末項</li>
+<li>若 <code>end</code> 大於陣列長度，則會提取至陣列的最末項</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>回傳：包含擷取範圍內元素的新陣列</li>
+</ul>
+<hr>
+<h3 id="concat"><a href="#concat" class="headerlink" title=".concat()"></a>.concat()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> str <span class="token operator">=</span> <span class="token string">'Hello World'</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'Jun'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> arr2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> res1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 1, 2, 3, 4, 5, 'Hello World' ]</span>
+
+<span class="token keyword">const</span> res2 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 1, 2, 3, 4, 5, { name: 'Jun' } ]</span>
+
+<span class="token keyword">const</span> arr3 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>arr2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr3<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 1, 2, 3, 4, 5, 6, 7, 8 ]</span></code></pre>
+<ul>
+<li>Pure function</li>
+<li>用途：合併陣列</li>
+<li>參數：<code>value1[, value2[, ...[, valueN]]]</code></li>
+<li>回傳：合併後的新陣列</li>
+</ul>
+<hr>
+<h3 id="sort"><a href="#sort" class="headerlink" title=".sort()"></a>.sort()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">75</span><span class="token punctuation">,</span> <span class="token number">12500</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> res1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span>x <span class="token operator">></span> y <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 25, 50, 75, 100, 600, 12500 ]</span>
+
+<span class="token keyword">const</span> res2 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span>x <span class="token operator">&lt;</span> y <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 12500, 600, 100, 75, 50, 25 ]</span></code></pre>
+<ul>
+<li>用途：對原陣列進行排序，預設排序行為根據 Unicode 編碼位置而定</li>
+<li>參數：<code>[compareFunction]</code><ul>
+<li>x 與 y 比較後，若回傳值小於 0 則會把 x 排在 y 前面</li>
+<li>x 與 y 比較後，若回傳值大於 0 則會把 x 排在 y 後面</li>
+<li>x 與 y 比較後，若回傳值等於 0 則 x 與 y 皆不改變順序</li>
+</ul>
+</li>
+<li>回傳：原地排序後的陣列，非原陣列的拷貝</li>
+</ul>
+<hr>
+<h3 id="shift"><a href="#shift" class="headerlink" title=".shift()"></a>.shift()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>ary<span class="token punctuation">.</span><span class="token function">shift</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>ary<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 2, 3, 4, 5 ]</span>
+
+<span class="token keyword">var</span> empty <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>empty<span class="token punctuation">.</span><span class="token function">shift</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// undefined</span></code></pre>
+<ul>
+<li>用途：移除陣列中的第 1 個元素</li>
+<li>參數：無</li>
+<li>回傳：被移除的元素（若陣列為空則回傳 <code>undefined</code>）</li>
+</ul>
+<hr>
+<h3 id="unshift"><a href="#unshift" class="headerlink" title=".unshift()"></a>.unshift()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">unshift</span><span class="token punctuation">(</span><span class="token string">'Hello'</span><span class="token punctuation">,</span> <span class="token string">'World'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 7</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 'Hello', 'World', 1, 2, 3, 4, 5 ]</span></code></pre>
+<ul>
+<li>用途：將參數自陣列的開頭插入</li>
+<li>參數：<code>element1[, ...[, elementN]]</code></li>
+<li>回傳：改動後的陣列長度</li>
+</ul>
+<hr>
+<h3 id="pop"><a href="#pop" class="headerlink" title=".pop()"></a>.pop()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 5</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 1, 2, 3, 4 ]</span>
+
+<span class="token keyword">var</span> empty <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>empty<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// undefined</span></code></pre>
+<ul>
+<li>用途：移除陣列中的最後 1 個元素</li>
+<li>參數：無</li>
+<li>回傳：被移除的元素（若陣列為空則回傳 <code>undefined</code>）</li>
+</ul>
+<hr>
+<h3 id="push"><a href="#push" class="headerlink" title=".push()"></a>.push()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'Hello'</span><span class="token punctuation">,</span> <span class="token string">'World'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 7</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 1, 2, 3, 4, 5, 'Hello', 'World' ]</span></code></pre>
+<ul>
+<li>用途：將參數自陣列的末項插入</li>
+<li>參數：<code>element1[, ...[, elementN]]</code></li>
+<li>回傳：改動後的陣列長度</li>
+</ul>
+<hr>
+<h3 id="splice"><a href="#splice" class="headerlink" title=".splice()"></a>.splice()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'Hello'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 3 ]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 1, 2, 'Hello', 4, 5 ]</span></code></pre>
+<ul>
+<li>用途：依據參數索引值對陣列刪除或增加元素</li>
+<li>參數：<code>start[, deleteCount[, item1[, item2[, ...]]]]</code><ul>
+<li><code>start</code>（起始值）<ul>
+<li>若起始值大於陣列長度，則會被設為該陣列的長度</li>
+<li>若起始值為負數，則會從該陣列的最末項向前改動</li>
+</ul>
+</li>
+<li><code>deleteCount</code>（由起始值開始計算之後要刪除的元素數量）<ul>
+<li>若省略 <code>deleteCount</code> 或其值大於該陣列長度 - 起始值，則所有從起始值至該陣列最末項的元素都會被刪除</li>
+<li>若 <code>deleteCount</code> 為 0 或負數，則不會有元素被刪除</li>
+</ul>
+</li>
+<li><code>items</code>（刪除完畢後將第 3 至第 n 個參數插入至刪除後的位置）<ul>
+<li>若給予要插入的元素，則該函數只會依據起始值及結束值刪除陣列中的元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>回傳：一個包含被刪除元素的陣列<ul>
+<li>若只有一個元素被刪除，仍然回傳包含一個被刪除的元素的陣列</li>
+<li>若無元素被刪除則回傳空陣列</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="join"><a href="#join" class="headerlink" title=".join()"></a>.join()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1,2,3,4,5</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 12345</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">'、'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1、2、3、4、5</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 1, 2, 3, 4, 5 ]</span></code></pre>
+<ul>
+<li>用途：將陣列元素合併後轉為字串並回傳</li>
+<li>參數：<code>[separator]</code><ul>
+<li>用來隔開陣列中各元素的字串</li>
+<li>若未給予此參數，則預設以逗號隔開</li>
+<li>若給予空字串，合併後元素間則不存在任何字元</li>
+</ul>
+</li>
+<li>回傳：字串</li>
+</ul>
+<hr>
+<h3 id="indexOf"><a href="#indexOf" class="headerlink" title=".indexOf()"></a>.indexOf()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 2</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// -1</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 1, 2, 3, 4, 5 ]</span></code></pre>
+<ul>
+<li>用途：對陣列搜尋參數是否存在於其中</li>
+<li>參數：<code>searchElement[, fromIndex]</code><ul>
+<li><code>searchElement</code>（元素）<ul>
+<li>欲在陣列中搜尋的元素</li>
+</ul>
+</li>
+<li><code>fromIndex</code>（起始值）<ul>
+<li>若該值大於或等於該陣列長度，則回傳 -1</li>
+<li>若該值為負數，則會從陣列的最末項往回算，最末項的索引值為 -1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>回傳：找到的元素索引值，若不存在於該陣列中則回傳 -1</li>
+</ul>
+<hr>
+<h3 id="lastIndexOf"><a href="#lastIndexOf" class="headerlink" title=".lastIndexOf()"></a>.lastIndexOf()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 5</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 5</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 1, 2, 3, 4, 5, 2, 3 ]</span></code></pre>
+<ul>
+<li>用途：對陣列搜尋參數是否存在於其中（搜尋方向為從陣列末端向前）</li>
+<li>參數：<code>searchElement[, fromIndex]</code><ul>
+<li><code>searchElement</code>（元素）<ul>
+<li>欲在陣列中搜尋的元素</li>
+</ul>
+</li>
+<li><code>fromIndex</code>（起始值）<ul>
+<li>於陣列最末項向前搜尋的起始索引值，預設為該陣列長度 -1</li>
+<li>若索引值大於等於該陣列長度，則會搜尋整個陣列</li>
+<li>若索引值為負數，會從陣列的最末項往回算，最後一個索引值為 -1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>回傳：找到的元素索引值，若不存在於該陣列中則回傳 -1</li>
+</ul>
+<hr>
+<h3 id="reverse"><a href="#reverse" class="headerlink" title=".reverse()"></a>.reverse()</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">reverse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 5, 4, 3, 2, 1 ]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [ 5, 4, 3, 2, 1 ]</span></code></pre>
+<ul>
+<li>用途：反轉陣列</li>
+<li>參數：無</li>
+<li>回傳：反轉後的陣列</li>
+</ul>
+</article><div data-mobile="true" data-href="https://peng940825.github.io/2020/02/29/2020-02-29-array" class="fb-comments"></div><span class="next-post"><a href="/2020/02/22/2020-02-22-emailjs/" itemprop="url">Older Post ⇒</a></span><br><br><br></main><script async src="https://www.googletagmanager.com/gtag/js?id=UA-158090190-1"></script><script async>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-158090190-1');
+</script><div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&amp;version=v6.0"></script></body></html>
