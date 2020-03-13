@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>ES6 縮寫與解構賦值 | Jun</title><meta name="description"><meta name="generator" content="Jun"><meta name="author"><meta name="keywords"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" type="image/png" sizes="196x196" href="/images/favicon-196x196.png"><meta name="msapplication-TileColor" content="#FFFFFF"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x310.png"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><h1><a href="/" alt="Jun" title="Jun" itemprop="headline">Jun</a></h1><p itemprop="description"></p><p>只要我的心還會跳，腿還能動</p><p>我就沒有理由停下前進的步伐</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/articles" alt="文章" title="文章" itemprop="url">文章</a></li><li itemprop="name"><a href="/author" alt="作者" title="作者" itemprop="url">作者</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline" class="post-heading">ES6 縮寫與解構賦值</h1><span class="page-tag-anchor"><a href="/tags/JavaScript" itemprop="url">#JavaScript
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/w3HexSchool" itemprop="url">#w3HexSchool
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/ES6" itemprop="url">#ES6
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/縮寫" itemprop="url">#縮寫
+&nbsp;&nbsp;</a></span><span class="page-tag-anchor"><a href="/tags/解構賦值" itemprop="url">#解構賦值
+&nbsp;&nbsp;</a></span><span class="post-meta"></span><br><br><h3 id="縮寫"><a href="#縮寫" class="headerlink" title="縮寫"></a>縮寫</h3><ul>
+<li><h5 id="物件縮寫"><a href="#物件縮寫" class="headerlink" title="物件縮寫"></a>物件縮寫</h5></li>
+</ul>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">const</span> kakashi <span class="token operator">=</span> <span class="token string">'卡卡西'</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> partner <span class="token operator">=</span> <span class="token punctuation">{</span>
+  naruto<span class="token punctuation">:</span> <span class="token string">'鳴人'</span><span class="token punctuation">,</span>
+  sasuke<span class="token punctuation">:</span> <span class="token string">'佐助'</span><span class="token punctuation">,</span>
+  sakura<span class="token punctuation">:</span> <span class="token string">'小櫻'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> seventhClass <span class="token operator">=</span> <span class="token punctuation">{</span>
+  kakashi<span class="token punctuation">,</span>
+  partner<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>seventhClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// {</span>
+<span class="token comment" spellcheck="true">//   kakashi: '卡卡西',</span>
+<span class="token comment" spellcheck="true">//   partner: { naruto: '鳴人', sasuke: '佐助', sakura: '小櫻' }</span>
+<span class="token comment" spellcheck="true">// }</span></code></pre>
+<ul>
+<li><h5 id="結合解構賦值"><a href="#結合解構賦值" class="headerlink" title="結合解構賦值"></a>結合解構賦值</h5></li>
+</ul>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">const</span> kakashi <span class="token operator">=</span> <span class="token string">'卡卡西'</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> partner <span class="token operator">=</span> <span class="token punctuation">{</span>
+  naruto<span class="token punctuation">:</span> <span class="token string">'鳴人'</span><span class="token punctuation">,</span>
+  sasuke<span class="token punctuation">:</span> <span class="token string">'佐助'</span><span class="token punctuation">,</span>
+  sakura<span class="token punctuation">:</span> <span class="token string">'小櫻'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> seventhClass <span class="token operator">=</span> <span class="token punctuation">{</span>
+  kakashi<span class="token punctuation">,</span>
+  <span class="token operator">...</span>partner<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>seventhClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// {</span>
+<span class="token comment" spellcheck="true">//   kakashi: '卡卡西',</span>
+<span class="token comment" spellcheck="true">//   naruto: '鳴人',</span>
+<span class="token comment" spellcheck="true">//   sasuke: '佐助',</span>
+<span class="token comment" spellcheck="true">//   sakura: '小櫻'</span>
+<span class="token comment" spellcheck="true">// }</span></code></pre>
+<hr>
+<h3 id="解構賦值"><a href="#解構賦值" class="headerlink" title="解構賦值"></a>解構賦值</h3><ul>
+<li><h5 id="解構陣列"><a href="#解構陣列" class="headerlink" title="解構陣列"></a>解構陣列</h5></li>
+</ul>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> <span class="token punctuation">[</span>one<span class="token punctuation">,</span> two<span class="token punctuation">,</span> three<span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>one<span class="token punctuation">,</span> two<span class="token punctuation">,</span> three<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1 2 3</span></code></pre>
+<ul>
+<li><h5 id="交換變數"><a href="#交換變數" class="headerlink" title="交換變數"></a>交換變數</h5></li>
+</ul>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">let</span> one <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> two <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span>one<span class="token punctuation">,</span> two<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>two<span class="token punctuation">,</span> one<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>one<span class="token punctuation">,</span> two<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1 2</span></code></pre>
+<ul>
+<li><h5 id="拆解字串"><a href="#拆解字串" class="headerlink" title="拆解字串"></a>拆解字串</h5></li>
+</ul>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">'安安你好嗎'</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> <span class="token punctuation">[</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">,</span> d<span class="token punctuation">,</span> e<span class="token punctuation">]</span> <span class="token operator">=</span> str<span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">,</span> d<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 安 安 你 好 嗎</span></code></pre>
+<ul>
+<li><h5 id="解構物件"><a href="#解構物件" class="headerlink" title="解構物件"></a>解構物件</h5></li>
+</ul>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">let</span> partner <span class="token operator">=</span> <span class="token punctuation">{</span>
+  naruto<span class="token punctuation">:</span> <span class="token string">'鳴人'</span><span class="token punctuation">,</span>
+  sasuke<span class="token punctuation">:</span> <span class="token string">'佐助'</span><span class="token punctuation">,</span>
+  sakura<span class="token punctuation">:</span> <span class="token string">'小櫻'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">{</span> sakura <span class="token punctuation">}</span> <span class="token operator">=</span> partner<span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>sakura<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 小櫻</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">{</span> naruto<span class="token punctuation">:</span> ohMyGod <span class="token punctuation">}</span> <span class="token operator">=</span> partner<span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>ohMyGod<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 鳴人</span></code></pre>
+<ul>
+<li><h5 id="預設值"><a href="#預設值" class="headerlink" title="預設值"></a>預設值</h5></li>
+</ul>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">let</span> <span class="token punctuation">[</span>one <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span> two <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>one<span class="token punctuation">,</span> two<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1 2</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">{</span> one <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span> two <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span> one<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>one<span class="token punctuation">,</span> two<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1 2</span></code></pre>
+<ul>
+<li><h5 id="類其餘參數解構"><a href="#類其餘參數解構" class="headerlink" title="類其餘參數解構"></a>類其餘參數解構</h5></li>
+</ul>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">let</span> <span class="token punctuation">[</span>x<span class="token punctuation">,</span> <span class="token operator">...</span>y<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1 [ 2, 3 ]</span></code></pre>
+</article><div data-mobile="true" data-href="https://peng940825.github.io/2020/03/14/2020-03-14-destructuringAssignment" class="fb-comments"></div><span class="next-post"><a href="/2020/03/08/2020-03-07-spreadOperator-restOperator/" itemprop="url">Older Post ⇒</a></span><br><br><br></main><script async src="https://www.googletagmanager.com/gtag/js?id=UA-158090190-1"></script><script async>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-158090190-1');
+</script><div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&amp;version=v6.0"></script></body></html>
