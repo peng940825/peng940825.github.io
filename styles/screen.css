@@ -732,7 +732,13 @@ main article.item:after {
 main article.full span.page-tag-anchor {
   float: right;
   margin-top: 1rem;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  background-color: #bdbdbd;
+  margin-right: 8px;
+  padding: 4px 0 4px 12px;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.75);
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.75);
 }
 main article.full h1.post-heading {
   text-align: center;
