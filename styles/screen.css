@@ -578,13 +578,14 @@ header h1 {
   font-size: 4.5rem;
   font-weight: 300;
   letter-spacing: -1px;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  text-shadow: 4px 4px 4px rgba(0,0,0,0.5);
+  margin-bottom: 24px;
 }
 header h1 a:hover {
   text-decoration: none;
 }
 header p {
-  color: #737373;
+  color: #bdbdbd;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.62rem;
   font-weight: normal;
@@ -614,7 +615,7 @@ header .space {
   -o-animation: slide 8s linear infinite;
   -ms-animation: slide 8s linear infinite;
   animation: slide 8s linear infinite;
-  background-color: #141414;
+  background-color: #37474f;
   background-position: center center;
   -webkit-background-size: 240px;
   -moz-background-size: 240px;
@@ -730,6 +731,8 @@ main article.item:after {
 }
 main article.full span.page-tag-anchor {
   float: right;
+  margin-top: 1rem;
+  font-size: 1.25rem;
 }
 main article.full h1.post-heading {
   text-align: center;
@@ -941,6 +944,8 @@ h4 {
 }
 h5 {
   font-size: 2.4rem;
+  font-weight: bold;
+  margin-top: 4rem;
 }
 h6 {
   font-size: 2rem;
