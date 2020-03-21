@@ -730,8 +730,12 @@ main article.item:after {
   -webkit-box-shadow: #f8f8f8 0 0 0 5px;
   box-shadow: #f8f8f8 0 0 0 5px;
 }
-main article.full span.page-tag-anchor {
-  float: right;
+main article.full div.page-tag-anchor-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+main article.full div.page-tag-anchor-container div.page-tag-anchor {
   margin-top: 1rem;
   font-size: 1.5rem;
   background-color: #bdbdbd;
