@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>在 Vue CLI 專案裡搭配 Vuex 使用 i18n | Jun</title><meta name="description"><meta name="generator" content="Jun"><meta name="author"><meta name="keywords"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" type="image/png" sizes="196x196" href="/images/favicon-196x196.png"><meta name="msapplication-TileColor" content="#FFFFFF"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x310.png"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><h1><a href="/" alt="Jun" title="Jun" itemprop="headline">Jun</a></h1><p itemprop="description"></p><p>只要我的心還會跳，腿還能動</p><p>我就沒有理由停下前進的步伐</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/articles" alt="文章" title="文章" itemprop="url">文章</a></li><li itemprop="name"><a href="/author" alt="作者" title="作者" itemprop="url">作者</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline" class="post-heading">在 Vue CLI 專案裡搭配 Vuex 使用 i18n</h1><div class="page-tag-anchor-container"><div class="page-tag-anchor"><a href="/tags/w3HexSchool" itemprop="url">#w3HexSchool
+&nbsp;&nbsp;</a></div><div class="page-tag-anchor"><a href="/tags/i18n" itemprop="url">#i18n
+&nbsp;&nbsp;</a></div><div class="page-tag-anchor"><a href="/tags/VueCLI" itemprop="url">#VueCLI
+&nbsp;&nbsp;</a></div></div><span class="post-meta"></span><br><ol>
+<li>首先我們安裝 vue-i18n</li>
+</ol>
+<pre class=" language-md"><code class="language-md">npm install vue-i18n</code></pre>
+<ol start="2">
+<li>在 <code>src/</code> 建立一個 <code>i18n</code> 資料夾，該資料夾裡主要放入語系檔</li>
+</ol>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// tw.js</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  hello<span class="token punctuation">:</span> <span class="token string">'哈囉'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// us.js</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  hello<span class="token punctuation">:</span> <span class="token string">'Hello'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// jp.js</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  hello<span class="token punctuation">:</span> <span class="token string">'こんにちは'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<ol start="3">
+<li>在 <code>src/</code> 建立一支 <code>i18n.js</code> 檔，將 <code>Vue</code>、<code>vue-i18n</code> 以及語系檔引入並啟用後導出</li>
+</ol>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// i18n.js</span>
+
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> VueI18n <span class="token keyword">from</span> <span class="token string">'vue-i18n'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> tw <span class="token keyword">from</span> <span class="token string">'./i18n/tw'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> us <span class="token keyword">from</span> <span class="token string">'./i18n/us'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> jp <span class="token keyword">from</span> <span class="token string">'./i18n/jp'</span><span class="token punctuation">;</span>
+
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>VueI18n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> messages <span class="token operator">=</span> <span class="token punctuation">{</span>
+  tw<span class="token punctuation">,</span>
+  us<span class="token punctuation">,</span>
+  jp<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> i18n <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueI18n</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  locale<span class="token punctuation">:</span> <span class="token string">'tw'</span><span class="token punctuation">,</span>
+  messages<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> i18n<span class="token punctuation">;</span></code></pre>
+<ol start="4">
+<li>在 <code>main.js</code> 引入我們的 <code>i18n.js</code></li>
+</ol>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// main.js</span>
+
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App.vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./store'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> i18n <span class="token keyword">from</span> <span class="token string">'./i18n'</span><span class="token punctuation">;</span>
+
+Vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span>productionTip <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  router<span class="token punctuation">,</span>
+  store<span class="token punctuation">,</span>
+  i18n<span class="token punctuation">,</span>
+  render<span class="token punctuation">:</span> <span class="token punctuation">(</span>h<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<ol start="5">
+<li>然後在 <code>store/index.js</code> 引入我們的 <code>i18n.js</code> 檔，搭配一支切換語言的函數即可</li>
+</ol>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// store/index.js</span>
+
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> i18n <span class="token keyword">from</span> <span class="token string">'../i18n'</span><span class="token punctuation">;</span>
+
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  state<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">SWITCH_LANG</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> payload<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      i18n<span class="token punctuation">.</span>locale <span class="token operator">=</span> payload<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  actions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  modules<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<ol start="6">
+<li>最後我們在 <code>App.vue</code> 中實現</li>
+</ol>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// App.vue</span>
+
+<span class="token operator">&lt;</span>template<span class="token operator">></span>
+  <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"app"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>select v<span class="token operator">-</span>model<span class="token operator">=</span><span class="token string">"value"</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>option value<span class="token operator">=</span><span class="token string">"tw"</span><span class="token operator">></span>中文<span class="token operator">&lt;</span><span class="token operator">/</span>option<span class="token operator">></span>
+      <span class="token operator">&lt;</span>option value<span class="token operator">=</span><span class="token string">"us"</span><span class="token operator">></span>英文<span class="token operator">&lt;</span><span class="token operator">/</span>option<span class="token operator">></span>
+      <span class="token operator">&lt;</span>option value<span class="token operator">=</span><span class="token string">"jp"</span><span class="token operator">></span>日文<span class="token operator">&lt;</span><span class="token operator">/</span>option<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>select<span class="token operator">></span>
+
+    <span class="token operator">&lt;</span>p<span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token function">$t</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  data<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+    value<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  watch<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">value</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'SWITCH_LANG'</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span></code></pre>
+<p>資料夾結構，新增與變動到的檔案：</p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/peng940825-2b6ec.appspot.com/o/vuecli-vuex-i18n%2Fimg.png?alt=media&token=75a5a3b4-504c-4467-9fac-9e4159169807" alt="img"></p>
+<p>這樣就實現了一個簡易的切換語言功能，更多關於 <code>Vue I18n</code> 的細部操作可參考他們的官網 <a href="https://kazupon.github.io/vue-i18n/" target="_blank" rel="noopener">https://kazupon.github.io/vue-i18n/</a></p>
+</article><div data-mobile="true" data-href="https://peng940825.github.io/2020/03/21/2020-03-21-vuecli-vuex-i18n" class="fb-comments"></div><span class="next-post"><a href="/2020/03/14/2020-03-14-destructuringAssignment/" itemprop="url">Older Post ⇒</a></span><br><br><br></main><script async src="https://www.googletagmanager.com/gtag/js?id=UA-158090190-1"></script><script async>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-158090190-1');
+</script><div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&amp;version=v6.0"></script></body></html>
