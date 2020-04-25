@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>淺談 Closure 閉包 | Jun</title><meta name="description"><meta name="generator" content="Jun"><meta name="author"><meta name="keywords"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" type="image/png" sizes="196x196" href="/images/favicon-196x196.png"><meta name="msapplication-TileColor" content="#FFFFFF"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x310.png"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><h1><a href="/" alt="Jun" title="Jun" itemprop="headline">Jun</a></h1><p itemprop="description"></p><p>只要我的心還會跳，腿還能動</p><p>我就沒有理由停下前進的步伐</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/articles" alt="文章" title="文章" itemprop="url">文章</a></li><li itemprop="name"><a href="/author" alt="作者" title="作者" itemprop="url">作者</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline" class="post-heading">淺談 Closure 閉包</h1><div class="page-tag-anchor-container"><div class="page-tag-anchor"><a href="/tags/JavaScript" itemprop="url">#JavaScript
+&nbsp;&nbsp;</a></div><div class="page-tag-anchor"><a href="/tags/w3HexSchool" itemprop="url">#w3HexSchool
+&nbsp;&nbsp;</a></div><div class="page-tag-anchor"><a href="/tags/Closure" itemprop="url">#Closure
+&nbsp;&nbsp;</a></div></div><span class="post-meta"></span><br><h5 id="變數的作用域"><a href="#變數的作用域" class="headerlink" title="變數的作用域"></a>變數的作用域</h5><p>要理解閉包必須先理解 JS 的變數作用域，在 JS 裡變數的作用域分為全域變數與函數內部的變數。</p>
+<p>JS 特別的地方在於函數內部可以讀取全域變數：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> num <span class="token operator">=</span> <span class="token number">99</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 99</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>反之，在函數外部則無法讀取函數內部的變數：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> num <span class="token operator">=</span> <span class="token number">99</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// num is not defined</span></code></pre>
+<p>但需要注意一點，函數內部在宣告變數的時候，記得要使用 <code>var</code> 來宣告，如果不用的話，實際上是宣告了一個全域變數：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  num <span class="token operator">=</span> <span class="token number">99</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 99</span></code></pre>
+<hr>
+<h5 id="如何從外部讀取函數內部的變數？"><a href="#如何從外部讀取函數內部的變數？" class="headerlink" title="如何從外部讀取函數內部的變數？"></a>如何從外部讀取函數內部的變數？</h5><p>那就是在函數的內部，再宣告一個函數：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> num <span class="token operator">=</span> <span class="token number">99</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> <span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> func2<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> res <span class="token operator">=</span> <span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">res</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 99</span></code></pre>
+<p>上面是一個非常簡單及經典的閉包範例，函數 <code>func2</code> 存在於函數 <code>func1</code> 之中，這時函數 <code>func1</code> 內部的變數對於函數 <code>func2</code> 而言都是可見的，但反之，則不可見，函數 <code>func2</code> 內部的變數對於函數 <code>func1</code> 而言就是不可見的，這是 JS 詞彙環境機制下的結果，函數實際上被寫在何處會左右 JS 查找變數時的方向。</p>
+<p>所以說既然 <code>func2</code> 可以讀取 <code>func1</code> 內部的變數，那麼我們只要把 <code>func2</code> 回傳，我們就可以在 <code>func1</code> 之外讀取其內部的變數了！</p>
+<hr>
+<h5 id="閉包的概念"><a href="#閉包的概念" class="headerlink" title="閉包的概念"></a>閉包的概念</h5><p>粗略地來講，閉包就是能夠讀取其它函數內部變數的函數，由於只有函數內部的函數才能讀取函數內部的變數，因此也可以把閉包簡單的理解為定義在一個函數內部的函數。</p>
+<p>但我會更偏向於形容閉包就是將函數內部和函數外部鏈接起來的一座橋梁。</p>
+<hr>
+<h5 id="閉包的用途"><a href="#閉包的用途" class="headerlink" title="閉包的用途"></a>閉包的用途</h5><ul>
+<li><p>讀取父函數內部的變數</p>
+</li>
+<li><p>讓父函數的變數始終保存於內存中</p>
+</li>
+</ul>
+<p>關於第二點的範例：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> num <span class="token operator">=</span> <span class="token number">99</span><span class="token punctuation">;</span>
+
+  plusOne <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    num <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> <span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> func2<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> res <span class="token operator">=</span> <span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">res</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 99</span>
+<span class="token function">plusOne</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">res</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 100</span>
+<span class="token function">plusOne</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">res</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 101</span></code></pre>
+<p>在上述的範例中，<code>res</code> 實際上就是存儲了一個閉包，<code>res</code> 執行了三次，結果分別為 99，100，101 這證明了函數 <code>func1</code> 內部的變數 <code>num</code> 始終保存於內存中沒有釋放，這是就是一個閉包最明顯的特徵。</p>
+<p>為什麼會這樣呢？</p>
+<p>原因在於 <code>func1</code> 是 <code>func2</code> 的父函數，而 <code>func2</code> 被賦值給了一個全域變數 <code>res</code>，這導致 <code>func2</code> 始終存在於內存中，然而 <code>func2</code> 的存在依賴於 <code>func1</code>，因此函數 <code>func1</code> 也始終存在於內存中，不會因為在調用結束後就被垃圾回收機制給回收了。</p>
+<!-- ##### 注意事項
+
+- 由於閉包會使得函數中的變數都被保存於內存中，內存的消耗很大，所以最好不要濫用閉包否則會造成網頁性能上的問題，非必要情況下應該在結束函數前，將不使用的內部變數確實刪除。
+
+- 閉包會在父函數外部改變父函數內部變數的值。所以如果你把父函數當作 Object 使用，把閉包當作它的公開方法，把內部變數當作它的私有屬性，那得小心不要隨便改變父函數內部變數的值。 -->
+</article><div data-mobile="true" data-href="https://peng940825.github.io/2020/04/25/2020-04-25-closure" class="fb-comments"></div><span class="next-post"><a href="/2020/04/19/2020-04-18-git-instruction/" itemprop="url">Older Post ⇒</a></span><br><br><br></main><script async src="https://www.googletagmanager.com/gtag/js?id=UA-158090190-1"></script><script async>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-158090190-1');
+</script><div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&amp;version=v6.0"></script></body></html>
