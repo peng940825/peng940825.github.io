@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Class 重點筆記 | Jun</title><meta name="description"><meta name="generator" content="Jun"><meta name="author"><meta name="keywords"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" type="image/png" sizes="196x196" href="/images/favicon-196x196.png"><meta name="msapplication-TileColor" content="#FFFFFF"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x310.png"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><h1><a href="/" alt="Jun" title="Jun" itemprop="headline">Jun</a></h1><p itemprop="description"></p><p>只要我的心還會跳，腿還能動</p><p>我就沒有理由停下前進的步伐</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/articles" alt="文章" title="文章" itemprop="url">文章</a></li><li itemprop="name"><a href="/author" alt="作者" title="作者" itemprop="url">作者</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline" class="post-heading">Class 重點筆記</h1><div class="page-tag-anchor-container"><div class="page-tag-anchor"><a href="/tags/JavaScript" itemprop="url">#JavaScript
+&nbsp;&nbsp;</a></div><div class="page-tag-anchor"><a href="/tags/w3HexSchool" itemprop="url">#w3HexSchool
+&nbsp;&nbsp;</a></div><div class="page-tag-anchor"><a href="/tags/Class" itemprop="url">#Class
+&nbsp;&nbsp;</a></div></div><span class="post-meta"></span><br><h3 id="關於-Class"><a href="#關於-Class" class="headerlink" title="關於 Class"></a>關於 Class</h3><p><code>class</code> 就是構造函數的語法糖，也可以說是構造函數的另一種寫法，使用時直接對 <code>class</code> 調用 <code>new</code> 即可：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">class</span> <span class="token class-name">C1</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>lastName<span class="token punctuation">,</span> firstName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>lastName <span class="token operator">=</span> lastName<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>firstName <span class="token operator">=</span> firstName<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">logName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`My name is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>lastName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>firstName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> c1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">C1</span><span class="token punctuation">(</span><span class="token string">'Peng'</span><span class="token punctuation">,</span> <span class="token string">'Jing Jun'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+c1<span class="token punctuation">.</span><span class="token function">logName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// My name is Peng Jing Jun</span></code></pre>
+<p>第一次學習 <code>class</code> 時雖然聽過它是構造函數的語法糖，但其實乍看之下還是挺不直覺的，所以這邊解剖一下上述代碼做了些什麼：</p>
+<ol>
+<li><p>首先聲明了一個 <code>C1</code> 的 <code>class</code>，換成構造函數的寫法就是 <code>function C1 () {};</code></p>
+</li>
+<li><p><code>class</code> 內定義的方法最終都位於原型上，換成構造函數的寫法就是 <code>C1.prototype.logName = function () {};</code></p>
+</li>
+<li><p><code>constructor</code> 方法就是構造函數，內部的 <code>this</code> 指向被 <code>new</code> 出來的實體</p>
+</li>
+<li><p><code>constructor</code> 是 <code>class</code> 的默認方法，通過 <code>new</code> 關鍵字生成的實體會自動調用 <code>constructor</code> 方法，即使沒有定義 <code>constructor</code> 也會默認產生一個空的 <code>constructor</code></p>
+</li>
+</ol>
+<pre class=" language-js"><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> C1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// function</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>C1 <span class="token operator">===</span> C1<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>constructor<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// true</span></code></pre>
+<p>構造函數的語法糖 <code>class</code> 只是讓原型的寫法更清晰、更像物件導向的語法而已</p>
+<p>上述代碼說明了 <code>class</code> 的型別就是函數，而 <code>class</code> 本身就是指向構造函數</p>
+<p>注意事項：</p>
+<ul>
+<li><p><code>class</code> 內部定義的方法皆不可枚舉</p>
+</li>
+<li><p><code>constructor</code> 方法默認返回實體物件</p>
+</li>
+<li><p><code>class</code> 與 <code>module</code> 內部默認以嚴格模式運行，所以不需要再使用 <code>use strict</code></p>
+</li>
+<li><p><code>class</code> 內部不存在 <code>hoisting</code></p>
+</li>
+<li><p><code>class</code> 的方法如果內部含有 <code>this</code> 則默認指向 <code>class</code> 實體</p>
+</li>
+</ul>
+<hr>
+<h3 id="靜態方法"><a href="#靜態方法" class="headerlink" title="靜態方法"></a>靜態方法</h3><p>所有在 <code>class</code> 中定義的方法都會被實體繼承，如果不希望被繼承的話，在方法名前加上 <code>static</code> 關鍵字就表示該方法不會被實體繼承，而且直接通過 <code>class</code> 就可以調用：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">class</span> <span class="token class-name">C1</span> <span class="token punctuation">{</span>
+  <span class="token keyword">static</span> <span class="token function">helloWorld</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Hello World!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+C1<span class="token punctuation">.</span><span class="token function">helloWorld</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Hello World!</span>
+
+<span class="token keyword">const</span> c1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">C1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+c1<span class="token punctuation">.</span><span class="token function">helloWorld</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// c1.helloWorld is not a function</span></code></pre>
+<p>上面說明了靜態方法可以直接於 <code>class</code> 上調用，而不是在 <code>class</code> 的實體上調用，如果在實體上調用的話就會噴錯，表示該方法並不存在</p>
+<p>另外，父類別的靜態方法可以被子類別繼承：</p>
+<!--
+
+```js
+class father {
+  static helloWorld() {
+    console.log('Hello World!');
+  }
+}
+
+class child extends father {}
+child.helloWorld(); // Hello World!
+```
+
+-->
+
+<hr>
+<h3 id="繼承"><a href="#繼承" class="headerlink" title="繼承"></a>繼承</h3><p>JavaScript 類別使用 <code>extends</code> 關鍵字實現單繼承：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">class</span> <span class="token class-name">Father</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">;</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Child</span> <span class="token keyword">extends</span> <span class="token class-name">Father</span> <span class="token punctuation">{</span>
+  hello <span class="token operator">=</span> <span class="token string">'Hello'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Child</span><span class="token punctuation">(</span><span class="token string">'Allen Iverson'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Allen Iverson</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Allen Iverson</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>hello<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Hello</span></code></pre>
+<p>這段代碼 <code>class Child extends Father {}</code> 使得 <code>Child</code> 繼承 <code>Father</code> 的字段、方法以及構造函數</p>
+<h5 id="父類別的構造函數：constructor-中的-super"><a href="#父類別的構造函數：constructor-中的-super" class="headerlink" title="父類別的構造函數：constructor() 中的 super()"></a>父類別的構造函數：<code>constructor()</code> 中的 <code>super()</code></h5><p>如果想在子類別中調用父類別的構造函數，需要在子類別的構造函數中使用 <code>super()</code> 方法：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">class</span> <span class="token class-name">Father</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">;</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Child</span> <span class="token keyword">extends</span> <span class="token class-name">Father</span> <span class="token punctuation">{</span>
+  hello <span class="token operator">=</span> <span class="token string">'Hello'</span><span class="token punctuation">;</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>hello <span class="token operator">=</span> str<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Child</span><span class="token punctuation">(</span><span class="token string">'Allen Iverson'</span><span class="token punctuation">,</span> <span class="token string">'Changed'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Allen Iverson</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Allen Iverson</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>hello<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Changed</span></code></pre>
+<p>上述代碼中在子類別 <code>Child</code> 中的 <code>super(name)</code> 執行了父類別 <code>Father</code> 的構造函數</p>
+<p>另外，在子類別構造函數中必須在使用 <code>this</code> 關鍵字之前調用 <code>super()</code> 方法，這樣才能確保父類別的構造函數完成初始化：</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">class</span> <span class="token class-name">Child</span> <span class="token keyword">extends</span> <span class="token class-name">Father</span> <span class="token punctuation">{</span>
+  hello <span class="token operator">=</span> <span class="token string">'Hello'</span><span class="token punctuation">;</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// ReferenceError ...</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>hello <span class="token operator">=</span> str<span class="token punctuation">;</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h5 id="父類別實體：方法中的-super"><a href="#父類別實體：方法中的-super" class="headerlink" title="父類別實體：方法中的 super"></a>父類別實體：方法中的 <code>super</code></h5><pre class=" language-js"><code class="language-js"><span class="token keyword">class</span> <span class="token class-name">Father</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">;</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Child</span> <span class="token keyword">extends</span> <span class="token class-name">Father</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> name <span class="token operator">=</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>name <span class="token operator">===</span> <span class="token string">''</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Empty'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Child</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+res<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Empty</span></code></pre>
+<p>上述代碼中子類別 <code>Child</code> 中的 <code>getName()</code> 透過 <code>super</code> 訪問了父類別 <code>Father</code> 的方法 <code>getName()</code></p>
+<p>另外，也可以在靜態方法中使用 <code>super</code> 訪問父類別的靜態方法</p>
+</article><div data-mobile="true" data-href="https://peng940825.github.io/undefined" class="fb-comments"></div><span class="next-post"><a href="/2020/04/26/2020-04-25-closure/" itemprop="url">Older Post ⇒</a></span><br><br><br></main><script async src="https://www.googletagmanager.com/gtag/js?id=UA-158090190-1"></script><script async>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-158090190-1');
+</script><div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&amp;version=v6.0"></script></body></html>
