@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>將圖片轉為 Webp 格式以減少載入時間 | Jun</title><meta name="description"><meta name="generator" content="Jun"><meta name="author"><meta name="keywords"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0"><link rel="stylesheet" type="text/css" href="/styles/screen.css"><link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png"><link rel="icon" type="image/png" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" type="image/png" sizes="196x196" href="/images/favicon-196x196.png"><meta name="msapplication-TileColor" content="#FFFFFF"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x310.png"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body itemscope itemtype="https://schema.org/WebPage"><header itemscope itemtype="https://schema.org/WPHeader"><h1><a href="/" alt="Jun" title="Jun" itemprop="headline">Jun</a></h1><p itemprop="description"></p><p>只要我的心還會跳，腿還能動</p><p>我就沒有理由停下前進的步伐</p><nav itemscope itemtype="https://schema.org/SiteNavigationElement"><ul><li itemprop="name"><a href="/articles" alt="文章" title="文章" itemprop="url">文章</a></li><li itemprop="name"><a href="/author" alt="作者" title="作者" itemprop="url">作者</a></li></ul></nav><div class="space"></div></header><main itemscope itemtype="https://schema.org/Blog"><article class="full"><h1 itemprop="headline" class="post-heading">將圖片轉為 Webp 格式以減少載入時間</h1><div class="page-tag-anchor-container"><div class="page-tag-anchor"><a href="/tags/JavaScript" itemprop="url">#JavaScript
+&nbsp;&nbsp;</a></div><div class="page-tag-anchor"><a href="/tags/w3HexSchool" itemprop="url">#w3HexSchool
+&nbsp;&nbsp;</a></div><div class="page-tag-anchor"><a href="/tags/Webp" itemprop="url">#Webp
+&nbsp;&nbsp;</a></div></div><span class="post-meta"></span><br><h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>我們都知道理想的網頁應該在最短的時間內開啟，然而圖片往往是拖慢網頁速度的重要因素之一，所以優化圖片不僅可以大幅度提升加載速度還能降低網路的流量。</p>
+<p>不過對圖片壓縮至一定程度後有可能發生失真或者檔案小不了多少的情況，如果有發生上述兩種限制，除了使用常見的 JPEG 或 PNG 格式外，也可以參考今天要講的主題，Webp 格式。</p>
+<hr>
+<h5 id="什麼是-Webp？"><a href="#什麼是-Webp？" class="headerlink" title="什麼是 Webp？"></a>什麼是 Webp？</h5><p>Webp 是一種支持有損壓縮和無損壓縮的圖片文件格式，派生自圖像編碼格式 VP8，根據 Google 測試結果，無損壓縮後的 Webp 比 PNG 少了 45% 的檔案大小，且即使 PNG 經過其他壓縮工具壓縮後 Webp 還是可以減少 28% 的文件小。</p>
+<hr>
+<h5 id="Webp-的好處"><a href="#Webp-的好處" class="headerlink" title="Webp 的好處"></a>Webp 的好處</h5><ol>
+<li><p>Webp 格式可以提供更好的壓縮比和更小的文件小，可以減少網路傳輸，使得網路傳輸的速度更快</p>
+</li>
+<li><p>網路傳輸的流量減少，可以節省 CDN 的流量消耗，節省戴寬成本。</p>
+</li>
+<li><p>如果仍有部分客戶端不支持 Webp 格式，可通過 CDN 層判斷，對於支持的客戶端響應 Webp 格式圖片，不支持的部分響應原圖，從而實現無縫自適應。</p>
+</li>
+</ol>
+<hr>
+<h5 id="使用-Node-js-實作-image-轉-Webp"><a href="#使用-Node-js-實作-image-轉-Webp" class="headerlink" title="使用 Node.js 實作 image 轉 Webp"></a>使用 Node.js 實作 image 轉 Webp</h5><ol>
+<li>安裝套件</li>
+</ol>
+<p><code>npm install imagemin imagemin-webp</code></p>
+<ol start="2">
+<li>手寫 script：</li>
+</ol>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// index.js</span>
+<span class="token keyword">const</span> imagemin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'imagemin'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> webp <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'imagemin-webp'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> convertImages <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> files <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'./images/*.{jpg,png}'</span><span class="token punctuation">]</span>
+
+  <span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
+    destination<span class="token punctuation">:</span> <span class="token string">'./output'</span><span class="token punctuation">,</span>
+    plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token function">webp</span><span class="token punctuation">(</span><span class="token punctuation">{</span> quality<span class="token punctuation">:</span> <span class="token number">100</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">await</span> <span class="token function">imagemin</span><span class="token punctuation">(</span>files<span class="token punctuation">,</span> config<span class="token punctuation">)</span>
+
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'已將圖片轉成 webp !'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">convertImages</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>上面的代碼會把 images 資料夾裡的所有 <code>.jpg</code> 和 <code>.png</code> 圖檔轉成 <code>.webp</code> 格式再輸出至 output 資料夾</p>
+<ol start="3">
+<li>執行</li>
+</ol>
+<p><code>node index.js</code></p>
+</article><div data-mobile="true" data-href="https://peng940825.github.io/undefined" class="fb-comments"></div><span class="next-post"><a href="/2020/05/16/2020-05-16-image-to-base64/" itemprop="url">Older Post ⇒</a></span><br><br><br></main><script async src="https://www.googletagmanager.com/gtag/js?id=UA-158090190-1"></script><script async>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-158090190-1');
+</script><div id="fb-root"></div><script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&amp;version=v6.0"></script></body></html>
